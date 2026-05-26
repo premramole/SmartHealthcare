@@ -1,0 +1,110 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    id 'com.google.gms.google-services'
+}
+
+android {
+    namespace 'com.example.smarthealthcare'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "com.example.smarthealthcare"
+        minSdk 24
+        targetSdk 36
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // 1. THIS LINE IS ADDED
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
+            ext.alwaysUpdateBuildId = false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+
+    // Add packaging options for Jitsi SDK
+    packagingOptions {
+        pickFirst '**/libc++_shared.so'
+        pickFirst '**/libwebrtc.so'
+        pickFirst '**/libjingle_peerconnection_so.so'
+        pickFirst '**/libfbjni.so'
+    }
+
+    // Add build optimizations
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xmaxerrs" << "500"
+        }
+    }
+}
+
+dependencies {
+    // 2. THIS DEPENDENCY IS ADDED
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+    // Core Android dependencies
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.lifecycle.runtime.ktx
+    implementation libs.androidx.activity
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.11.0'
+
+    // Room database dependencies
+    implementation 'androidx.room:room-runtime:2.6.1'
+    implementation 'androidx.room:room-ktx:2.6.1'
+    annotationProcessor 'androidx.room:room-compiler:2.6.1'
+
+    // Firebase dependencies
+    implementation 'com.google.firebase:firebase-auth:22.3.1'
+    implementation 'com.google.firebase:firebase-firestore:24.10.1'
+    implementation 'com.google.firebase:firebase-storage:20.3.0'
+    implementation 'com.google.firebase:firebase-messaging:23.4.0'
+    implementation 'com.google.firebase:firebase-database:20.3.0'
+
+    // Other required dependencies
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    implementation 'com.karumi:dexter:6.2.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:3.1.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.google.android.gms:play-services-location:21.1.0'
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+    
+    // Jitsi SDK
+    // implementation 'org.jitsi.react:jitsi-meet-sdk:3.+'
+    // implementation 'com.github.yqritc:Android-ScalableVideoView:1.0.4'
+    
+    // Dialogflow
+    // implementation 'ai.api:libai:1.6.12'
+
+    // Testing dependencies
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
+
+
+

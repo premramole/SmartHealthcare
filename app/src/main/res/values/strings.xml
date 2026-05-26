@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Smart Healthcare</string>
+    
+    <string-array name="appointment_modes">
+        <item>Online Consultation</item>
+        <item>Clinic Visit</item>
+        <item>Home Visit</item>
+    </string-array>
+</resources>

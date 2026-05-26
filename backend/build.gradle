@@ -1,0 +1,35 @@
+plugins {
+    id 'org.springframework.boot' version '3.1.0'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'java'
+}
+
+group = 'com.example.smarthealthcare'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'com.h2database:h2:2.1.214'
+    implementation 'org.postgresql:postgresql:42.6.0'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    
+    // For handling JSON
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    
+    // For security (optional)
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'com.h2database:h2:2.1.214'
+    
+    // For assertions in tests
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom style for outlined text input fields -->
+    <style name="CustomOutlinedInputField" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="boxStrokeColor">@color/purple_500</item>
+        <item name="hintTextColor">@color/purple_500</item>
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+    </style>
+</resources>
